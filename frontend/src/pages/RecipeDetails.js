@@ -13,7 +13,7 @@ const RecipeDetails = () => {
     const fetchRecipeDetails = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`https://recipesharing.onrender.com/api/recipes/${id}`);
+        const response = await fetch(`https://recipesharing-mzt5.onrender.com/api/recipes/${id}`);
         if (!response.ok) {
           throw new Error("Recipe not found");
         }

@@ -9,7 +9,7 @@ const CategoryPage = () => {
   useEffect(() => {
     const fetchRecipesByCategory = async () => {
       try {
-        const response = await fetch(`https://recipesharing.onrender.com/api/recipes/category/${category}`);
+        const response = await fetch(`https://recipesharing-mzt5.onrender.com/api/recipes/category/${category}`);
         const data = await response.json();
         setRecipes(data);
       } catch (error) {

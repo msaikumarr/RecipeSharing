@@ -15,7 +15,7 @@ const RegionRecipes = () => {
         setLoading(true);
         setRecipes([]); // Clear old recipes before fetching
 
-        const response = await fetch(`https://recipesharing.onrender.com/api/recipes/state/${encodeURIComponent(state)}`);
+        const response = await fetch(`https://recipesharing-mzt5.onrender.com/api/recipes/state/${encodeURIComponent(state)}`);
         
         if (!response.ok) {
           throw new Error("No recipes found for this region.");

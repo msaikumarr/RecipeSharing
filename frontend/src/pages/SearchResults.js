@@ -17,7 +17,7 @@ const SearchResults = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch(`https://recipesharing.onrender.com/api/recipes/search?title=${encodeURIComponent(query)}`);
+        const response = await fetch(`https://recipesharing-mzt5.onrender.com/api/recipes/search?title=${encodeURIComponent(query)}`);
 
         if (!response.ok) throw new Error("No recipes found");
         const data = await response.json();

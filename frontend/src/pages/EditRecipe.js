@@ -84,7 +84,7 @@ const EditRecipe = () => {
       formData.append('benefits', recipe.benefits);
       formData.append('recommendedHotels', recipe.recommendedHotels);
 
-      const response = await fetch(`http://localhost:5000/api/recipes/${id}`, {
+      const response = await fetch(`https://recipesharing-mzt5.onrender.com/api/recipes/${id}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,

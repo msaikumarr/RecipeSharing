@@ -56,7 +56,7 @@ const UploadRecipe = () => {
       formData.append('benefits', recipe.benefits);
       formData.append('recommendedHotels', recipe.recommendedHotels);
 
-      const response = await fetch("https://recipesharing.onrender.com/api/recipes", {
+      const response = await fetch("https://recipesharing-mzt5.onrender.com/api/recipes", {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
