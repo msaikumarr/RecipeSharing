@@ -28,7 +28,7 @@ const EditRecipe = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/recipes/${id}`);
+        const res = await fetch(`https://recipesharing.onrender.com/api/recipes/${id}`);
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || "Failed to load recipe");
 

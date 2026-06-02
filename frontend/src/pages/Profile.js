@@ -23,12 +23,12 @@ const Profile = () => {
 
     try {
       const [userResponse, recipesResponse] = await Promise.all([
-        fetch("http://localhost:5000/api/users/me", {
+        fetch("https://recipesharing.onrender.com/api/users/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }),
-        fetch("http://localhost:5000/api/recipes/my-recipes", {
+        fetch("https://recipesharing.onrender.com/api/recipes/my-recipes", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -71,7 +71,7 @@ const Profile = () => {
 
   const deleteRecipe = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/recipes/${id}`, {
+      const response = await fetch(`https://recipesharing.onrender.com/api/recipes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -127,7 +127,7 @@ const Profile = () => {
                         formData.append('profileImage', editForm.profileImage);
                       }
 
-                      const res = await fetch("http://localhost:5000/api/users/profile", {
+                      const res = await fetch("https://recipesharing.onrender.com/api/users/profile", {
                         method: "PUT",
                         headers: {
                           Authorization: `Bearer ${token}`,
