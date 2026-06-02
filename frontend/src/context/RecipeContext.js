@@ -12,7 +12,7 @@ export const RecipeProvider = ({ children }) => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/recipes");
+        const response = await fetch("https://recipesharing.onrender.com/api/recipes");
         if (!response.ok) throw new Error("Failed to fetch recipes");
 
         const data = await response.json();
@@ -30,7 +30,7 @@ export const RecipeProvider = ({ children }) => {
   const fetchRecipesByState = async (state) => {
     try {
       setRecipes([]); // Clear old recipes before fetching new ones
-      const response = await fetch(`http://localhost:5000/api/recipes/${encodeURIComponent(state)}`);
+      const response = await fetch(`https://recipesharing.onrender.com/api/recipes/${encodeURIComponent(state)}`);
       const data = await response.json();
   
       if (!response.ok) {
@@ -47,7 +47,7 @@ export const RecipeProvider = ({ children }) => {
   // Upload a new recipe
   const addRecipe = async (formData) => {
     try {
-      const response = await fetch("http://localhost:5000/api/recipes", {
+      const response = await fetch("https://recipesharing.onrender.com/api/recipes", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -68,7 +68,7 @@ export const RecipeProvider = ({ children }) => {
   // Delete a recipe
   const deleteRecipe = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/recipes/${id}`, {
+      const response = await fetch(`https://recipesharing.onrender.com/api/recipes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -86,7 +86,7 @@ export const RecipeProvider = ({ children }) => {
   const fetchUserRecipes = useCallback(async () => {
     try {
       if (!token) return; // Ensure user is logged in
-      const response = await fetch("http://localhost:5000/api/recipes/my-recipes", {
+      const response = await fetch("https://recipesharing.onrender.com/api/recipes/my-recipes", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

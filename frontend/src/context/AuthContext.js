@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken); // Set the token state
-      fetch("http://localhost:5000/api/users/me", {
+      fetch("https://recipesharing.onrender.com/api/users/me", {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
         .then((res) => res.json())
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("https://recipesharing.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
 
   const signupUser = async (name, email, password) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch("https://recipesharing.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
