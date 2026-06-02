@@ -1,64 +1,89 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
+
 const connectDB = require("./db/connection");
-const Recipe = require("./models/Recipe"); //  Import the Recipe model
+const Recipe = require("./models/Recipe");
+
 const recipeRoutes = require("./routes/recipeRoutes");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 
 dotenv.config();
-connectDB(); // Connect to MongoDB
+
+// Connect Database
+connectDB();
 
 const app = express();
 
+// CORS Configuration
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://recipe-sharing-three-peach.vercel.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
+
 // Middleware
-app.use(cors());
 app.use(express.json());
-const path = require('path');
+app.use(express.urlencoded({ extended: true }));
 
-// Serve uploaded files statically
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Serve uploaded files
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Health Check Route
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 
-//  Search API directly in server.js
+// Search Route
 app.get("/api/recipes/search", async (req, res) => {
-  console.log("Search request received!");
   try {
     const { title } = req.query;
+
     if (!title) {
-      return res.status(400).json({ message: "Title is requir ed for searching." });
+      return res
+        .status(400)
+        .json({ message: "Title is required for searching." });
     }
 
-    console.log("Searching for:", title);
-    const recipes = await Recipe.find({ title: { $regex: title, $options: "i" } });
+    const recipes = await Recipe.find({
+      title: { $regex: title, $options: "i" },
+    });
 
-    if (recipes.length === 0) {
-      return res.status(404).json({ message: " No recipes found." });
-    }
-
-    res.json(recipes);
+    res.status(200).json(recipes);
   } catch (error) {
     console.error("Search Error:", error);
-    res.status(500).json({ message: " Server error", error: error.message });
+    res.status(500).json({
+      message: "Server Error",
+      error: error.message,
+    });
   }
 });
 
-
-
-// Routes
+// API Routes
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/comments", commentRoutes);
 
-const PORT = process.env.PORT || 5000;
-
-app.get('/', (req, res) => {
-  res.send("Server is running");
+// 404 Route
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
 });
 
+// Start Server
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(` Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
