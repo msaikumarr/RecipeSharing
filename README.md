@@ -220,16 +220,11 @@ This project was developed during a hackathon and was recognized as a **winning 
 
 ---
 
-## 🚀 Future Enhancements
-
-* ❤️ Like and favorite recipes
-* 💬 Comments and reviews
-* ⭐ Recipe ratings
-* 🤖 AI-powered recipe recommendations
-* 🥗 Nutrition information
+## 🚀 Future Enhancement
+* 🤖 AI-powered recipe recommendation
 * 📅 Meal planning
 * 🛒 Shopping list generation
-* 🌙 Dark mode
+* 🌙 Dark modes
 * 🔔 Notifications
 
 ---
